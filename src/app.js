@@ -12,7 +12,6 @@ import routesEncabezados from './v1/routes/encabezados.routes.js';
 import routesDetalles from './v1/routes/detalles.routes.js';
 import routesFacturas from './v1/routes/facturas.routes.js';
 import routesProvProd from './v1/routes/proveedores_productos.routes.js';
-import { swaggerDocs } from './v1/swagger.js';
 import cors from 'cors';
 
 const app = express();
@@ -39,5 +38,5 @@ const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
-    swaggerDocs(app, PORT); // Pasa el puerto como argumento a la función swaggerDocs
+   
 });
