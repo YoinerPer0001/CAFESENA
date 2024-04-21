@@ -21,24 +21,24 @@ USE `cafeteriadb`;
 DROP TABLE IF EXISTS `categorias`;
 
 CREATE TABLE `categorias` (
-  `Id_Cat` int(11) NOT NULL AUTO_INCREMENT,
+  `Id_Cat` varchar(11) NOT NULL,
   `Nom_Cat` varchar(255) DEFAULT NULL,
   `ESTADO_REGISTRO` int(1) DEFAULT NULL,
   `createdAt` datetime DEFAULT NULL,
   `updatedAt` datetime NOT NULL,
   PRIMARY KEY (`Id_Cat`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 /*Data for the table `categorias` */
 
 insert  into `categorias`(`Id_Cat`,`Nom_Cat`,`ESTADO_REGISTRO`,`createdAt`,`updatedAt`) values 
-(1,'Circuitos 1',0,NULL,'2024-04-20 22:01:58'),
-(2,'programacion',1,'2024-03-21 01:48:47','2024-03-21 01:48:47'),
-(9,'destornilladores',1,'2024-04-04 15:02:12','2024-04-04 15:02:12'),
-(10,'desarrollo web',1,'2024-04-18 22:37:38','2024-04-18 22:37:38'),
-(11,'IA2',0,'2024-04-19 01:27:37','2024-04-20 20:04:56'),
-(13,'desarrollo web 2',1,'2024-04-20 19:56:47','2024-04-20 19:56:47'),
-(14,'sin categoria',1,'2024-04-20 16:53:23','2024-04-20 16:53:24');
+('1','Circuitos 1',0,NULL,'2024-04-20 22:01:58'),
+('10','desarrollo web',1,'2024-04-18 22:37:38','2024-04-18 22:37:38'),
+('11','IA2',0,'2024-04-19 01:27:37','2024-04-20 20:04:56'),
+('13','desarrollo web 2',1,'2024-04-20 19:56:47','2024-04-20 19:56:47'),
+('14','sin categoria',1,'2024-04-20 16:53:23','2024-04-20 16:53:24'),
+('2','programacion',1,'2024-03-21 01:48:47','2024-03-21 01:48:47'),
+('9','destornilladores',1,'2024-04-04 15:02:12','2024-04-04 15:02:12');
 
 /*Table structure for table `detalles` */
 
@@ -187,24 +187,23 @@ CREATE TABLE `productos` (
   `PROD_NOM` varchar(100) DEFAULT NULL,
   `PROD_DESC` text DEFAULT NULL,
   `PROD_PREC` decimal(10,2) DEFAULT NULL,
-  `CAT_ID_FK` int(11) DEFAULT NULL,
+  `CAT_ID_FK` varchar(100) DEFAULT NULL,
   `ESTADO_REGISTRO` int(1) DEFAULT NULL,
   `createdAt` datetime DEFAULT NULL,
   `updatedAt` datetime DEFAULT NULL,
   PRIMARY KEY (`PROD_ID`),
-  KEY `categoria_idFK` (`CAT_ID_FK`),
-  CONSTRAINT `productos_ibfk_1` FOREIGN KEY (`CAT_ID_FK`) REFERENCES `categorias` (`Id_Cat`)
+  KEY `categoria_idFK` (`CAT_ID_FK`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 /*Data for the table `productos` */
 
 insert  into `productos`(`PROD_ID`,`PROD_COD`,`PROD_NOM`,`PROD_DESC`,`PROD_PREC`,`CAT_ID_FK`,`ESTADO_REGISTRO`,`createdAt`,`updatedAt`) values 
-('2','2342345','YUCA','YUCA ARINOSA',233213.00,14,0,'2024-04-20 17:01:15','2024-04-20 22:21:17'),
-('3','2343','ACEITE','EL MEJOR ACEITE',342434.00,14,1,'2024-04-20 17:01:44','2024-04-20 22:01:58'),
-('erxyjd754lv79ccg9','0022','CEL','full hd 4k',1502300.00,14,0,'2024-04-19 22:44:14','2024-04-20 22:17:37'),
-('erxyjd8tklv8nsben','4324','GASEOSA 100ML UVA','GASEOSA 100ML UVA',1000.00,1,1,'2024-04-20 22:16:20','2024-04-20 22:16:20'),
-('erxyjd8tklv8nsj1l','3434','GASEOSA 200ML UVA','GASEOSA 100ML UVA',1000.00,1,1,'2024-04-20 22:16:30','2024-04-20 22:16:30'),
-('erxyjd92wlv86v4x0','3233','GASEOSA 100ML UVA','GASEOSA 100ML UVA',1000.00,14,1,'2024-04-20 14:22:38','2024-04-20 22:01:58');
+('2','2342345','YUCA','YUCA ARINOSA',233213.00,'14',0,'2024-04-20 17:01:15','2024-04-20 22:21:17'),
+('3','2343','ACEITE','EL MEJOR ACEITE',342434.00,'14',1,'2024-04-20 17:01:44','2024-04-20 22:01:58'),
+('erxyjd754lv79ccg9','0022','CEL','full hd 4k',1502300.00,'14',0,'2024-04-19 22:44:14','2024-04-20 22:17:37'),
+('erxyjd8tklv8nsben','4324','GASEOSA 100ML UVA','GASEOSA 100ML UVA',1000.00,'1',1,'2024-04-20 22:16:20','2024-04-20 22:16:20'),
+('erxyjd8tklv8nsj1l','3434','GASEOSA 200ML UVA','GASEOSA 100ML UVA',1000.00,'1',1,'2024-04-20 22:16:30','2024-04-20 22:16:30'),
+('erxyjd92wlv86v4x0','3233','GASEOSA 100ML UVA','GASEOSA 100ML UVA',1000.00,'14',1,'2024-04-20 14:22:38','2024-04-20 22:01:58');
 
 /*Table structure for table `proveedor_productos` */
 
@@ -283,7 +282,7 @@ DROP TABLE IF EXISTS `tokens`;
 
 CREATE TABLE `tokens` (
   `Id_Token` int(255) NOT NULL AUTO_INCREMENT,
-  `Token` varchar(255) DEFAULT NULL,
+  `Token` text DEFAULT NULL,
   `Fec_Caducidad` varchar(100) DEFAULT NULL,
   `User_Id_FK` varchar(100) DEFAULT NULL,
   `Tipo_token` char(1) DEFAULT NULL COMMENT '1: inicio Sesion, 2: verificacion Email, 3: recuperacion de contraseña, 4: Verificar IP',
